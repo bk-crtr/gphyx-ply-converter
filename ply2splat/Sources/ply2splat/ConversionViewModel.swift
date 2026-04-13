@@ -70,8 +70,6 @@ class ConversionViewModel: ObservableObject {
         panel.canChooseFiles = true
         panel.allowedContentTypes = [
             UTType(filenameExtension: "ply"),
-            UTType(filenameExtension: "glb"),
-            UTType(filenameExtension: "gltf"),
             UTType(filenameExtension: "obj"),
             UTType(filenameExtension: "usdz"),
             UTType(filenameExtension: "usdc"),
