@@ -1,0 +1,450 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+    "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat_ply2splat.bundle/background.png" : {
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/background.png"
+        }
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat_ply2splat.bundle/background.png"
+        }
+      ]
+    }
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.ply2splat-arm64-apple-macosx26.0-release.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/sources",
+      "importPath" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/AppMain.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/ContentView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/ConversionViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/GaussianCloud.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/KSplatWriter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/MeshConverter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/MetalTransformer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/PLYParser.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/SPZWriter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/SplatWriter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/DerivedSources/resource_bundle_accessor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<ply2splat-arm64-apple-macosx26.0-release.module-resources>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "ply2splat",
+      "moduleOutputPath" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/Modules/ply2splat.swiftmodule",
+      "objects" : [
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/AppMain.swift.o",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/ContentView.swift.o",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/ConversionViewModel.swift.o",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/GaussianCloud.swift.o",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/KSplatWriter.swift.o",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/MeshConverter.swift.o",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/MetalTransformer.swift.o",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/PLYParser.swift.o",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/SPZWriter.swift.o",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/SplatWriter.swift.o",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/resource_bundle_accessor.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-whole-module-optimization",
+        "-num-threads",
+        "12",
+        "-serialize-diagnostics",
+        "-O",
+        "-j12",
+        "-DSWIFT_PACKAGE",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE",
+        "-module-cache-path",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "ply2splat_main",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ply2splat"
+      ],
+      "outputFileMapPath" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/AppMain.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/ContentView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/ConversionViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/GaussianCloud.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/KSplatWriter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/MeshConverter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/MetalTransformer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/PLYParser.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/SPZWriter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/SplatWriter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/resource_bundle_accessor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/Modules/ply2splat.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/AppMain.swift",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/ContentView.swift",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/ConversionViewModel.swift",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/GaussianCloud.swift",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/KSplatWriter.swift",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/MeshConverter.swift",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/MetalTransformer.swift",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/PLYParser.swift",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/SPZWriter.swift",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/SplatWriter.swift",
+        "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/DerivedSources/resource_bundle_accessor.swift"
+      ],
+      "tempsPath" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build",
+      "wholeModuleOptimization" : true
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "ply2splat" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "ply2splat",
+      "-package-name",
+      "ply2splat",
+      "-c",
+      "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/AppMain.swift",
+      "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/ContentView.swift",
+      "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/ConversionViewModel.swift",
+      "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/GaussianCloud.swift",
+      "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/KSplatWriter.swift",
+      "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/MeshConverter.swift",
+      "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/MetalTransformer.swift",
+      "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/PLYParser.swift",
+      "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/SPZWriter.swift",
+      "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/SplatWriter.swift",
+      "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/DerivedSources/resource_bundle_accessor.swift",
+      "-I",
+      "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-whole-module-optimization",
+      "-num-threads",
+      "12",
+      "-serialize-diagnostics",
+      "-O",
+      "-j12",
+      "-DSWIFT_PACKAGE",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE",
+      "-module-cache-path",
+      "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "ply2splat_main",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ply2splat",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "ply2splat" : [
+
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/AppMain.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/ContentView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/ConversionViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/GaussianCloud.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/KSplatWriter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/MeshConverter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/MetalTransformer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/PLYParser.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/SPZWriter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/Sources/ply2splat/SplatWriter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/DerivedSources/resource_bundle_accessor.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/sources"
+    },
+    "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/AppMain.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/ContentView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/ConversionViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/GaussianCloud.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/KSplatWriter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/MeshConverter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/MetalTransformer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/PLYParser.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/SPZWriter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/SplatWriter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.build/resource_bundle_accessor.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/ply2splat.product/Objects.LinkFileList"
+    },
+    "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/abuahmad/Projects/GPHYX_PLYConverter/ply2splat/.build/arm64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}
