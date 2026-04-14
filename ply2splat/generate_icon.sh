@@ -10,10 +10,10 @@ fi
 ICONSET_DIR="AppIcon.iconset"
 mkdir -p "$ICONSET_DIR"
 
-# Center crop to 1:1 and resize to 1024x1024
-# The source is 1376x768, so we crop a 768x768 center.
+# Center crop to 1:1, resize to 820x820 (20% smaller than 1024), and pad to 1024x1024
 sips -s format png -c 768 768 "$SOURCE_IMG" --out temp_crop.png
-sips -s format png -z 1024 1024 temp_crop.png --out square_source.png
+sips -s format png -z 820 820 temp_crop.png --out temp_resize.png
+sips -s format png -p 1024 1024 --padColor 000000 temp_resize.png --out square_source.png
 
 # Generate various sizes from the square source
 sips -s format png -z 16 16     square_source.png --out "$ICONSET_DIR/icon_16x16.png"
