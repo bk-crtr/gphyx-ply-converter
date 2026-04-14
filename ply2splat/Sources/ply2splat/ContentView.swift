@@ -33,7 +33,7 @@ extension Color {
 struct GPHYXColors {
     static let bg = Color(hex: "050505")
     static let card = Color(white: 1, opacity: 0.03)
-    static let accent  = Color(hex: "E64A19")
+    static let accent  = Color(hex: "406AFF")
     static let textMain = Color.white
 }
 
@@ -243,7 +243,7 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 6)
-                                .background(Color(red: 1.0, green: 0.6, blue: 0.2))
+                                .background(GPHYXColors.accent)
                                 .cornerRadius(8)
                                 .font(.system(size: 13, weight: .semibold))
                         }
