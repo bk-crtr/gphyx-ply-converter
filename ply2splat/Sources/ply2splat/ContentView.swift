@@ -301,7 +301,7 @@ struct ContentView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(height: 60)
-                                .opacity(0.9)
+                                .opacity(0.6)
                         }
                         Spacer()
                     }
