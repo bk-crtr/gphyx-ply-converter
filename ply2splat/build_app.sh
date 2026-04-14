@@ -26,6 +26,7 @@ cp .build/release/ply2splat "$MACOS_DIR/"
 
 # Copying Resources
 cp Sources/ply2splat/background.png "$RESOURCES_DIR/"
+cp Sources/ply2splat/GPHYX_LOGO_Vertical.png "$RESOURCES_DIR/"
 
 # Copying Fonts
 mkdir -p "$RESOURCES_DIR/Fonts"
@@ -64,6 +65,7 @@ cat > "$CONTENTS_DIR/Info.plist" <<EOF
 EOF
 
 echo "Signing the Application..."
+xattr -cr "$APP_DIR"
 codesign --force --deep --sign "Developer ID Application: GADZHI MUSALCHIEV (NM74G59H9M)" "$APP_DIR"
 
 echo "✅ Done! Application created at $APP_DIR and signed!"

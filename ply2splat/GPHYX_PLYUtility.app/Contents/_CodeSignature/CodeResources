@@ -8,6 +8,10 @@
 		<data>
 		0L+zMbwz0PeYWBVfofyG8ZLbiVs=
 		</data>
+		<key>Resources/GPHYX_LOGO_Vertical.png</key>
+		<data>
+		KFF37bSxh2Yn+APws8oDkm5Smb4=
+		</data>
 		<key>Resources/background.png</key>
 		<data>
 		D9OtbATK7NxScxPM8Lif5hhkubg=
@@ -20,6 +24,13 @@
 			<key>hash2</key>
 			<data>
 			JfEQoOI+CIjbIEZRzU9tq7E62TXSdaS3g2VxToN2X5E=
+			</data>
+		</dict>
+		<key>Resources/GPHYX_LOGO_Vertical.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			P3c6Q2pe3nnf8J7Dhd5gvX3FU3rzt+wgayu/Tb16sPw=
 			</data>
 		</dict>
 		<key>Resources/background.png</key>
