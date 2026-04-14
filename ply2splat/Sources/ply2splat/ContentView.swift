@@ -31,10 +31,27 @@ extension Color {
 }
 
 struct GPHYXColors {
-    static let bg      = Color(hex: "0D0D0D")
-    static let card    = Color(hex: "1A1A1A")
+    static let bg = Color(hex: "050505")
+    static let card = Color(white: 1, opacity: 0.03)
     static let accent  = Color(hex: "E64A19")
     static let textMain = Color.white
+}
+
+struct DotGridBackground: View {
+    var body: some View {
+        Canvas { context, size in
+            let dotSize: CGFloat = 0.5
+            let spacing: CGFloat = 4.0
+            let dotColor = Color.white.opacity(0.05)
+            
+            for x in stride(from: 0, to: size.width, by: spacing) {
+                for y in stride(from: 0, to: size.height, by: spacing) {
+                    let rect = CGRect(x: x, y: y, width: dotSize, height: dotSize)
+                    context.fill(Path(ellipseIn: rect), with: .color(dotColor))
+                }
+            }
+        }
+    }
 }
 
 // MARK: - Components
@@ -201,6 +218,8 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             GPHYXColors.bg.ignoresSafeArea()
+            DotGridBackground().ignoresSafeArea()
+            
             HStack(alignment: .top, spacing: 0) {
 
                 // ── Left panel ──────────────────────
