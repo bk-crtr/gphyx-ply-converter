@@ -232,7 +232,7 @@ struct ContentView: View {
                             .opacity(0.15)
                             .blur(radius: 2)
                             .shadow(color: GPHYXColors.accent.opacity(0.3), radius: 20)
-                            .offset(y: 50)
+                            .offset(y: 120)
                     }
                 }
                 .frame(width: 300)
