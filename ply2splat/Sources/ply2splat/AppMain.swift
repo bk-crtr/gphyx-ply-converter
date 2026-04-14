@@ -5,7 +5,7 @@ struct ply2splatApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .frame(minWidth: 820, minHeight: 560)
+                .frame(minWidth: 680, minHeight: 700)
         }
         .windowStyle(.hiddenTitleBar)
         .defaultSize(width: 1100, height: 700)

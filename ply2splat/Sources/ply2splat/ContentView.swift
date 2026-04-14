@@ -386,6 +386,6 @@ struct ContentView: View {
                 .background(Color.black.opacity(0.18))
             }
         }
-        .frame(minWidth: 850, minHeight: 620)
+        .frame(minWidth: 680, minHeight: 700)
     }
 }
