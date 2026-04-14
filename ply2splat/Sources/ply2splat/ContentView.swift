@@ -207,13 +207,28 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 20) {
 
                     // Header
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text("GPHYX")
-                            .font(.system(size: 11, weight: .black))
-                            .foregroundColor(GPHYXColors.accent)
-                        Text("PLY2SPLAT")
-                            .font(.custom("Cairo", size: 22).weight(.black))
-                            .foregroundColor(.white)
+                    HStack(alignment: .bottom) {
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text("GPHYX")
+                                .font(.system(size: 11, weight: .black))
+                                .foregroundColor(GPHYXColors.accent)
+                            Text("PLY2SPLAT")
+                                .font(.custom("Cairo", size: 22).weight(.black))
+                                .foregroundColor(.white)
+                        }
+                        Spacer()
+                        Button(action: {
+                            NSWorkspace.shared.open(URL(string: "https://gphyx.lemonsqueezy.com/checkout/buy/42bb58be-a091-46a7-b938-81a79ef605d7")!)
+                        }) {
+                            Text("☕ Buy me a coffee")
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 6)
+                                .background(Color(red: 1.0, green: 0.6, blue: 0.2))
+                                .cornerRadius(8)
+                                .font(.system(size: 13, weight: .semibold))
+                        }
+                        .buttonStyle(.plain)
                     }
 
                     Divider().background(Color.white.opacity(0.05))
