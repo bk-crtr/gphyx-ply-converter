@@ -26,6 +26,7 @@ cp .build/release/ply2splat "$MACOS_DIR/"
 
 # Copying Resources
 cp Sources/ply2splat/background.png "$RESOURCES_DIR/"
+cp Sources/ply2splat/GPHYX_LOGO.png "$RESOURCES_DIR/"
 cp Sources/ply2splat/GPHYX_LOGO_Vertical.png "$RESOURCES_DIR/"
 
 # Copying Fonts

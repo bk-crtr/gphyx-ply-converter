@@ -309,6 +309,22 @@ struct ContentView: View {
 
                     Spacer()
 
+                    // Panel Logo
+                    HStack {
+                        Spacer()
+                        if let logoURL = Bundle.main.url(forResource: "GPHYX_LOGO", withExtension: "png"),
+                           let nsImg = NSImage(contentsOf: logoURL) {
+                            Image(nsImage: nsImg)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 60)
+                                .opacity(0.9)
+                        }
+                        Spacer()
+                    }
+
+                    Spacer()
+
                     // Action buttons
                     VStack(spacing: 10) {
                         Button(action: viewModel.startConversion) {
