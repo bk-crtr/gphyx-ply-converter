@@ -104,7 +104,7 @@ struct SectionLabel: View {
     let text: String
     var body: some View {
         Text(text)
-            .font(.custom("Cairo", size: 10).weight(.black))
+            .font(.custom("Cairo", size: 10).weight(.bold))
             .foregroundColor(.white.opacity(0.5))
             .tracking(1)
     }
@@ -165,7 +165,7 @@ struct CompactStatusCard: View {
 
                 VStack(spacing: 2) {
                     Text(isConverting ? "\(Int(progress * 100))%" : formatCount(splatCount))
-                        .font(.custom("Cairo", size: 24).weight(.black))
+                        .font(.custom("Cairo", size: 24).weight(.bold))
                         .foregroundColor(.white)
                         .minimumScaleFactor(0.5)
                         .lineLimit(1)
@@ -192,8 +192,8 @@ struct CompactStatusCard: View {
 
     private func statItem(label: String, value: String) -> some View {
         VStack(spacing: 2) {
-            Text(label).font(.custom("Cairo", size: 9).weight(.black)).foregroundColor(.white.opacity(0.45))
-            Text(value).font(.custom("Cairo", size: 16).weight(.black)).foregroundColor(.white)
+            Text(label).font(.custom("Cairo", size: 9).weight(.bold)).foregroundColor(.white.opacity(0.45))
+            Text(value).font(.custom("Cairo", size: 16).weight(.bold)).foregroundColor(.white)
         }
         .frame(maxWidth: .infinity)
     }
@@ -232,10 +232,10 @@ struct ContentView: View {
                     HStack(alignment: .bottom) {
                         VStack(alignment: .leading, spacing: 0) {
                             Text("GPHYX")
-                                .font(.system(size: 11, weight: .black))
+                                .font(.system(size: 11, weight: .bold))
                                 .foregroundColor(GPHYXColors.accent)
                             Text("PLY2SPLAT")
-                                .font(.custom("Cairo", size: 22).weight(.black))
+                                .font(.custom("Cairo", size: 22).weight(.heavy))
                                 .foregroundColor(.white)
                         }
                         Spacer()
@@ -314,7 +314,7 @@ struct ContentView: View {
                     VStack(spacing: 10) {
                         Button(action: viewModel.startConversion) {
                             Text(viewModel.isConverting ? "CONVERTING…" : "START CONVERSION")
-                                .font(.custom("Cairo", size: 15).weight(.black))
+                                .font(.custom("Cairo", size: 15).weight(.bold))
                                 .tracking(1)
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
@@ -340,14 +340,14 @@ struct ContentView: View {
                         Spacer()
                         Button(action: viewModel.copyLogsToClipboard) {
                             Text("COPY")
-                                .font(.custom("Cairo", size: 10).weight(.black))
+                                .font(.custom("Cairo", size: 10).weight(.bold))
                                 .foregroundColor(.white.opacity(0.4))
                         }
                         .buttonStyle(.plain)
                         
                         Button(action: viewModel.clearLogs) {
                             Text("CLEAR")
-                                .font(.custom("Cairo", size: 10).weight(.black))
+                                .font(.custom("Cairo", size: 10).weight(.bold))
                                 .foregroundColor(.white.opacity(0.4))
                         }
                         .buttonStyle(.plain)
