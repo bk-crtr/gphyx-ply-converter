@@ -41,7 +41,7 @@ struct DotGridBackground: View {
     var body: some View {
         Canvas { context, size in
             let dotSize: CGFloat = 0.5
-            let spacing: CGFloat = 2.67  // 4.0 / 1.5
+            let spacing: CGFloat = 4.0
             let dotColor = Color.white.opacity(0.3)
             
             for x in stride(from: 0, to: size.width, by: spacing) {
