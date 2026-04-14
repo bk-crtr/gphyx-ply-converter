@@ -219,24 +219,7 @@ struct ContentView: View {
         ZStack {
             GPHYXColors.bg.ignoresSafeArea()
             
-            // Background Logo (behind grid)
-            HStack(spacing: 0) {
-                Spacer()
-                VStack {
-                    if let logoURL = Bundle.main.url(forResource: "GPHYX_LOGO_Vertical", withExtension: "png"),
-                       let nsImg = NSImage(contentsOf: logoURL) {
-                        Image(nsImage: nsImg)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 80)
-                            .opacity(0.8)
-                            .shadow(color: GPHYXColors.accent.opacity(0.3), radius: 20)
-                            .offset(y: 120)
-                    }
-                }
-                .frame(width: 300)
-            }
-            .ignoresSafeArea()
+
             
             DotGridBackground().ignoresSafeArea()
             
