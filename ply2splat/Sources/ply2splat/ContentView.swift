@@ -225,112 +225,110 @@ struct ContentView: View {
             
             HStack(alignment: .top, spacing: 0) {
 
-                // ── Left panel ──────────────────────
-                VStack(alignment: .leading, spacing: 20) {
-
-                    // Header
-                    HStack(alignment: .bottom) {
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text("GPHYX")
-                                .font(.system(size: 11, weight: .bold))
-                                .foregroundColor(GPHYXColors.accent)
-                            Text("PLY2SPLAT")
-                                .font(.custom("Cairo", size: 22).weight(.heavy))
-                                .foregroundColor(.white)
+                // ── Left panel ──────�                // ── Left panel ──────────────────────
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 20) {
+                        // Header
+                        HStack(alignment: .bottom) {
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text("GPHYX")
+                                    .font(.system(size: 11, weight: .bold))
+                                    .foregroundColor(GPHYXColors.accent)
+                                Text("PLY2SPLAT")
+                                    .font(.custom("Cairo", size: 22).weight(.heavy))
+                                    .foregroundColor(.white)
+                            }
+                            Spacer()
+                            Button(action: {
+                                NSWorkspace.shared.open(URL(string: "https://gphyx.lemonsqueezy.com/checkout/buy/42bb58be-a091-46a7-b938-81a79ef605d7")!)
+                            }) {
+                                Text("☕ Buy me a coffee")
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(GPHYXColors.accent)
+                                    .cornerRadius(8)
+                                    .font(.system(size: 13, weight: .semibold))
+                            }
+                            .buttonStyle(.plain)
                         }
-                        Spacer()
-                        Button(action: {
-                            NSWorkspace.shared.open(URL(string: "https://gphyx.lemonsqueezy.com/checkout/buy/42bb58be-a091-46a7-b938-81a79ef605d7")!)
-                        }) {
-                            Text("☕ Buy me a coffee")
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 6)
-                                .background(GPHYXColors.accent)
-                                .cornerRadius(8)
-                                .font(.system(size: 13, weight: .semibold))
-                        }
-                        .buttonStyle(.plain)
-                    }
 
-                    Divider().background(Color.white.opacity(0.05))
+                        Divider().background(Color.white.opacity(0.05))
 
-                    // Source
-                    FileRowCard(
-                        label: "SOURCE FILE",
-                        value: viewModel.inputPath,
-                        placeholder: "Choose a PLY file...",
-                        onPick: viewModel.selectInputFile
-                    )
-
-                    // Destination
-                    FileRowCard(
-                        label: "DESTINATION",
-                        value: viewModel.outputDirectory,
-                        placeholder: "Output folder…",
-                        onPick: viewModel.selectOutputDirectory,
-                        onReveal: viewModel.openOutputDirectory
-                    )
-
-                    // SH Degree
-                    VStack(alignment: .leading, spacing: 6) {
-                        SectionLabel(text: "SH DEGREE")
-                        GPHYXSegmentedPicker(
-                            options: ["Auto", "0", "1", "2", "3"],
-                            selection: $viewModel.shDegreeIndex
+                        // Source
+                        FileRowCard(
+                            label: "SOURCE FILE",
+                            value: viewModel.inputPath,
+                            placeholder: "Choose a PLY file...",
+                            onPick: viewModel.selectInputFile
                         )
-                    }
 
-                    // Reduce Splats
-                    VStack(alignment: .leading, spacing: 6) {
-                        SectionLabel(text: "REDUCE SPLATS")
-                        GPHYXSegmentedPicker(
-                            options: ["40%", "60%", "80%", "100%"],
-                            selection: $viewModel.splatPercentIndex
+                        // Destination
+                        FileRowCard(
+                            label: "DESTINATION",
+                            value: viewModel.outputDirectory,
+                            placeholder: "Output folder…",
+                            onPick: viewModel.selectOutputDirectory,
+                            onReveal: viewModel.openOutputDirectory
                         )
-                    }
 
-                    Spacer()
-
-                    // Panel Logo
-                    HStack {
-                        Spacer()
-                        if let logoURL = Bundle.main.url(forResource: "GPHYX_LOGO", withExtension: "png"),
-                           let nsImg = NSImage(contentsOf: logoURL) {
-                            Image(nsImage: nsImg)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 60)
-                                .opacity(0.4)
-                                .shadow(color: GPHYXColors.accent.opacity(0.8), radius: 4)
-                                .shadow(color: GPHYXColors.accent.opacity(0.4), radius: 12)
+                        // SH Degree
+                        VStack(alignment: .leading, spacing: 6) {
+                            SectionLabel(text: "SH DEGREE")
+                            GPHYXSegmentedPicker(
+                                options: ["Auto", "0", "1", "2", "3"],
+                                selection: $viewModel.shDegreeIndex
+                            )
                         }
-                        Spacer()
-                    }
 
-                    Spacer()
-
-                    // Action buttons
-                    VStack(spacing: 10) {
-                        Button(action: viewModel.startConversion) {
-                            Text(viewModel.isConverting ? "CONVERTING…" : "START CONVERSION")
-                                .font(.custom("Cairo", size: 15).weight(.bold))
-                                .tracking(1)
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 14)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 14)
-                                        .fill(viewModel.isConverting
-                                              ? GPHYXColors.accent.opacity(0.5)
-                                              : GPHYXColors.accent)
-                                )
+                        // Reduce Splats
+                        VStack(alignment: .leading, spacing: 6) {
+                            SectionLabel(text: "REDUCE SPLATS")
+                            GPHYXSegmentedPicker(
+                                options: ["40%", "60%", "80%", "100%"],
+                                selection: $viewModel.splatPercentIndex
+                            )
                         }
-                        .buttonStyle(.plain)
-                        .disabled(viewModel.isConverting || viewModel.inputPath.isEmpty)
+
+                        // Panel Logo
+                        HStack {
+                            Spacer()
+                            if let logoURL = Bundle.main.url(forResource: "GPHYX_LOGO", withExtension: "png"),
+                               let nsImg = NSImage(contentsOf: logoURL) {
+                                Image(nsImage: nsImg)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 60)
+                                    .opacity(0.4)
+                                    .shadow(color: GPHYXColors.accent.opacity(0.8), radius: 4)
+                                    .shadow(color: GPHYXColors.accent.opacity(0.4), radius: 12)
+                            }
+                            Spacer()
+                        }
+                        .padding(.vertical, 10)
+
+                        // Action buttons
+                        VStack(spacing: 10) {
+                            Button(action: viewModel.startConversion) {
+                                Text(viewModel.isConverting ? "CONVERTING…" : "START CONVERSION")
+                                    .font(.custom("Cairo", size: 15).weight(.bold))
+                                    .tracking(1)
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 14)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 14)
+                                            .fill(viewModel.isConverting
+                                                  ? GPHYXColors.accent.opacity(0.5)
+                                                  : GPHYXColors.accent)
+                                    )
+                            }
+                            .buttonStyle(.plain)
+                            .disabled(viewModel.isConverting || viewModel.inputPath.isEmpty)
+                        }
                     }
+                    .padding(28)
                 }
-                .padding(28)
                 .frame(maxWidth: .infinity)
 
                 // ── Right panel ─────────────────────
@@ -386,6 +384,11 @@ struct ContentView: View {
                 .padding(28)
                 .frame(width: 300)
                 .background(Color.black.opacity(0.18))
+            }
+        }
+        .frame(minWidth: 850, minHeight: 620)
+    }
+}r.black.opacity(0.18))
             }
         }
         .frame(minWidth: 750, minHeight: 500)
