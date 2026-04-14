@@ -228,10 +228,11 @@ struct ContentView: View {
                         Image(nsImage: nsImg)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 100)
+                            .frame(width: 80)
                             .opacity(0.15)
                             .blur(radius: 2)
                             .shadow(color: GPHYXColors.accent.opacity(0.3), radius: 20)
+                            .offset(y: 50)
                     }
                 }
                 .frame(width: 300)
