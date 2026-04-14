@@ -7,7 +7,7 @@ killall GPHYX_SplatUtility 2>/dev/null || true
 killall GPHYX_PLYUtility 2>/dev/null || true
 killall "PLY Utility" 2>/dev/null || true
 
-APP_NAME="GPHYX_PLYUtility"
+APP_NAME="G.Ply2Splat"
 APP_DIR="$APP_NAME.app"
 CONTENTS_DIR="$APP_DIR/Contents"
 MACOS_DIR="$CONTENTS_DIR/MacOS"
@@ -49,7 +49,7 @@ cat > "$CONTENTS_DIR/Info.plist" <<EOF
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>GPHYX PLY Utility</string>
+    <string>G.Ply2Splat</string>
     <key>ATSApplicationFontsPath</key>
     <string>Fonts</string>
     <key>CFBundlePackageType</key>
