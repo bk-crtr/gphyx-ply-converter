@@ -225,7 +225,7 @@ struct ContentView: View {
             
             HStack(alignment: .top, spacing: 0) {
 
-                // ── Left panel ──────�                // ── Left panel ──────────────────────
+                // ── Left panel ──────────────────────────
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 20) {
                         // Header
@@ -387,10 +387,5 @@ struct ContentView: View {
             }
         }
         .frame(minWidth: 850, minHeight: 620)
-    }
-}r.black.opacity(0.18))
-            }
-        }
-        .frame(minWidth: 750, minHeight: 500)
     }
 }
