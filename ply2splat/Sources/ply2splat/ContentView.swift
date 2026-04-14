@@ -331,6 +331,12 @@ struct ContentView: View {
                                         .frame(width: 300)
                                 }
                                 
+                                VStack(alignment: .leading) {
+                                    Text("MAX SPLATS").font(.custom("Cairo", size: 12).weight(.bold)).foregroundColor(.white)
+                                    GPHYXSegmentedPicker(options: ["100K", "250K", "500K", "1M"], selection: $viewModel.maxSplatsIndex)
+                                        .frame(width: 300)
+                                }
+                                
                                 Spacer()
                                 
                                 GPHYXRoundButton(icon: "power", action: { viewModel.useMetal.toggle() }, isOn: viewModel.useMetal)

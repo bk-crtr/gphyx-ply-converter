@@ -22,7 +22,7 @@ class MeshConverter {
     }
 
     /// Converts a 3D mesh (GLB/OBJ/USDZ) to a GaussianCloud
-    func convert(url: URL, progress: ((Double) -> Void)? = nil) throws -> GaussianCloud {
+    func convert(url: URL, maxSplats: Int = 1_000_000, progress: ((Double) -> Void)? = nil) throws -> GaussianCloud {
         debugLog("MeshConverter: Opening asset at \(url.path)")
         
         debugLog("MeshConverter: URL exists = \(FileManager.default.fileExists(atPath: url.path))")
@@ -51,6 +51,19 @@ class MeshConverter {
             processAndTraverse(object, into: &splats)
             
             progress?(Double(i + 1) / Double(max(asset.count, 1)))
+        }
+
+        // Decimation logic
+        if splats.count > maxSplats {
+            let step = max(1, splats.count / maxSplats)
+            debugLog("MeshConverter: Decimating from \(splats.count) to ~\(maxSplats) (step: \(step))")
+            var decimated: [GaussianSplat] = []
+            decimated.reserveCapacity(maxSplats + 1)
+            for i in stride(from: 0, to: splats.count, by: step) {
+                decimated.append(splats[i])
+            }
+            splats = decimated
+            debugLog("MeshConverter: Decimated to \(splats.count) splats")
         }
 
         debugLog("MeshConverter: Finished conversion. Total splats extracted: \(splats.count)")
@@ -124,13 +137,33 @@ class MeshConverter {
 
         let rawData = vertexBuffer.map().bytes
 
+        // Fallback color from material if no vertex color attribute
+        var defaultR: Float = 0.7
+        var defaultG: Float = 0.7
+        var defaultB: Float = 0.7
+
+        if colorOffset < 0 {
+            if let submeshes = mesh.submeshes as? [MDLSubmesh] {
+                if let material = submeshes.first?.material {
+                    if let prop = material.property(with: .baseColor) {
+                        if prop.type == .float3 {
+                            defaultR = prop.float3Value.x
+                            defaultG = prop.float3Value.y
+                            defaultB = prop.float3Value.z
+                            debugLog("MeshConverter: Using material base color (\(defaultR), \(defaultG), \(defaultB))")
+                        }
+                    }
+                }
+            }
+        }
+
         for i in 0..<vertexCount {
             let base = rawData.advanced(by: i * stride)
 
             let posPtr = base.advanced(by: positionOffset).assumingMemoryBound(to: Float.self)
             let position = SIMD3<Float>(posPtr[0], posPtr[1], posPtr[2])
 
-            var r: Float = 0.5, g: Float = 0.5, b: Float = 0.5
+            var r: Float = defaultR, g: Float = defaultG, b: Float = defaultB
             if colorOffset >= 0 {
                 let colPtr = base.advanced(by: colorOffset).assumingMemoryBound(to: Float.self)
                 r = colPtr[0]; g = colPtr[1]; b = colPtr[2]

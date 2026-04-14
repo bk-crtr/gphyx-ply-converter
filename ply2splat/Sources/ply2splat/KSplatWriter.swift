@@ -14,31 +14,26 @@ final class KSplatWriter {
     func write(cloud: GaussianCloud, to path: String) throws {
         var buffer = Data()
 
-        // ── File Header (32 bytes used in reference) ──
-        // Alignment: Page size = 4096 bytes
-        let version: UInt16 = 1
-        let sectionCount: UInt8 = 1
+        // ── File Header (4096 bytes, page-aligned) ──
         let splatCount = UInt32(cloud.count)
-        let shDeg = UInt8(cloud.shDegree)
 
-        // Offset 0: Version/Magic
-        appendU16(&buffer, version)   // 0-1
-        buffer.append(0)              // 2
-        buffer.append(0)              // 3
-        
-        // Offset 4: totalSplatCount
-        appendU32(&buffer, splatCount) // 4-7
-        
-        // Offset 8: Section information
-        buffer.append(1)              // 8 -> Section Count?
-        buffer.append(0)              // 9
-        buffer.append(0)              // 10
-        buffer.append(0)              // 11
-        
-        // Offset 12: Repeat splat count? (Matches reference dump)
-        appendU32(&buffer, splatCount) // 12-15
-        
-        // Offset 16..31: Reserved or additional meta
+        // Offset 0-1: Version = 1 as big-endian UInt16 → 0x00 0x01
+        buffer.append(0x00)
+        buffer.append(0x01)
+        // Offset 2-3: reserved
+        buffer.append(0x00)
+        buffer.append(0x00)
+
+        // Offset 4-7: totalSplatCount (little-endian UInt32)
+        appendU32(&buffer, splatCount)
+
+        // Offset 8-11: sectionCount = 1 (little-endian UInt32)
+        appendU32(&buffer, 1)
+
+        // Offset 12-15: maxSplatCount (same as splatCount)
+        appendU32(&buffer, splatCount)
+
+        // Offset 16..31: Reserved zeros
         buffer.append(contentsOf: [UInt8](repeating: 0, count: 16))
 
         // Pad to 4096 bytes (0x1000)

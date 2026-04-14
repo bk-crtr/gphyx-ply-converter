@@ -27,6 +27,9 @@ class ConversionViewModel: ObservableObject {
     @Published var shDegree: Int = -1 // -1 means Auto
     @Published var useMetal: Bool = true
     
+    let maxSplatsValues = [100_000, 250_000, 500_000, 1_000_000]
+    @Published var maxSplatsIndex: Int = 2 // Default: 500K
+    
     @Published var isConverting: Bool = false
     @Published var progress: Double = 0.0
     @Published var logMessages: [LogMessage] = []
@@ -158,7 +161,8 @@ class ConversionViewModel: ObservableObject {
             } else {
                 log("Converting 3D mesh: \(inputURL.lastPathComponent)")
                 let converter = MeshConverter()
-                cloud = try converter.convert(url: inputURL) { p in
+                let targetMax = self.maxSplatsValues[self.maxSplatsIndex]
+                cloud = try converter.convert(url: inputURL, maxSplats: targetMax) { p in
                     DispatchQueue.main.async { self.progress = p * 0.3 }
                 }
                 log("Extracted \(cloud.count) splats from mesh")
