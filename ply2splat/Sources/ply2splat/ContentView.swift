@@ -302,6 +302,8 @@ struct ContentView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(height: 60)
                                 .opacity(0.6)
+                                .shadow(color: GPHYXColors.accent.opacity(0.8), radius: 4)
+                                .shadow(color: GPHYXColors.accent.opacity(0.4), radius: 12)
                         }
                         Spacer()
                     }
