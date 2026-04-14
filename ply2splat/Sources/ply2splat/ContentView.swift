@@ -1,6 +1,7 @@
 import SwiftUI
 import AppKit
 
+// MARK: - Visual Effect
 struct VisualEffectView: NSViewRepresentable {
     func makeNSView(context: Context) -> NSVisualEffectView {
         let view = NSVisualEffectView()
@@ -12,6 +13,7 @@ struct VisualEffectView: NSViewRepresentable {
     func updateNSView(_ nsView: NSVisualEffectView, context: Context) {}
 }
 
+// MARK: - Colors
 extension Color {
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -19,387 +21,318 @@ extension Color {
         Scanner(string: hex).scanHexInt64(&int)
         let a, r, g, b: UInt64
         switch hex.count {
-        case 3: // RGB (12-bit)
-            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
-        case 6: // RGB (24-bit)
-            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
-        case 8: // ARGB (32-bit)
-            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
-        default:
-            (a, r, g, b) = (1, 1, 1, 0)
+        case 3: (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default: (a, r, g, b) = (1, 1, 1, 0)
         }
-        self.init(
-            .sRGB,
-            red: Double(r) / 255,
-            green: Double(g) / 255,
-            blue: Double(b) / 255,
-            opacity: Double(a) / 255
-        )
+        self.init(.sRGB, red: Double(r)/255, green: Double(g)/255, blue: Double(b)/255, opacity: Double(a)/255)
     }
 }
-
-// MARK: - Dashboard Components
 
 struct GPHYXColors {
-    static let bg = Color(hex: "0D0D0D")
-    static let card = Color(hex: "1A1A1A")
-    static let accent = Color(hex: "E64A19") // Muted Electric Orange (10% less bright)
-    static let accentBlue = Color.blue
+    static let bg      = Color(hex: "0D0D0D")
+    static let card    = Color(hex: "1A1A1A")
+    static let accent  = Color(hex: "E64A19")
     static let textMain = Color.white
-    static let textSec = Color.white.opacity(0.8)
 }
 
-struct GPHYXButtonStyle: ButtonStyle {
-    var isProminent: Bool = false
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(.custom("Cairo", size: 16).weight(.bold))
-            .padding(.horizontal, 24)
-            .padding(.vertical, 12)
-            .background(
-                RoundedRectangle(cornerRadius: 15)
-                    .fill(isProminent ? GPHYXColors.accent : GPHYXColors.card)
-            )
-            .foregroundColor(.white)
-            .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
-            .animation(.easeOut(duration: 0.1), value: configuration.isPressed)
-    }
-}
+// MARK: - Components
 
-struct GPHYXEqualizerView: View {
-    var body: some View {
-        HStack(alignment: .bottom, spacing: 4) {
-            ForEach(0..<4) { i in
-                RoundedRectangle(cornerRadius: 3)
-                    .fill(GPHYXColors.accent)
-                    .frame(width: 8, height: CGFloat([30, 50, 40, 60][i]))
-            }
-        }
-        .padding(8)
-        .background(GPHYXColors.card)
-        .cornerRadius(12)
-    }
-}
-
-struct GPHYXRoundButton: View {
+struct GPHYXIconButton: View {
     let icon: String
     let action: () -> Void
-    var isOn: Bool = false
-    
+    var isProminent: Bool = false
     var body: some View {
         Button(action: action) {
-            ZStack {
-                Circle()
-                    .fill(GPHYXColors.card)
-                    .shadow(color: isOn ? GPHYXColors.accent.opacity(0.6) : Color.white.opacity(0.3), 
-                            radius: isOn ? 15 : 8, x: 0, y: 3)
-                    .overlay(
-                        Circle().stroke(isOn ? GPHYXColors.accent.opacity(0.4) : Color.white.opacity(0.1), lineWidth: 1)
-                    )
-                
-                Image(systemName: icon)
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(isOn ? GPHYXColors.accent : .white.opacity(0.7))
-            }
-            .frame(width: 50, height: 50)
+            Image(systemName: icon)
+                .font(.system(size: 16, weight: .bold))
+                .foregroundColor(.white)
+                .frame(width: 36, height: 36)
+                .background(isProminent ? GPHYXColors.accent : GPHYXColors.card)
+                .cornerRadius(10)
         }
         .buttonStyle(.plain)
-    }
-}
-
-struct GPHYXStatusCardRefined: View {
-    let value: String
-    let label: String
-    var progress: Double = 0.0
-    var isConverting: Bool = false
-    
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 24)
-                .fill(GPHYXColors.accent)
-            
-            VStack(spacing: 8) {
-                ZStack {
-                    // Empty Dots (Faint White)
-                    DashedCircleStatic(count: 32)
-                        .foregroundColor(Color.white.opacity(0.3))
-                    
-                    // Filled Dots based on progress (Bright White)
-                    DashedCircleStatic(count: 32, limit: Int(progress * 32))
-                        .foregroundColor(Color.white)
-                    
-                    VStack {
-                        Text(isConverting ? "\(Int(progress * 100))%" : value)
-                            .font(.custom("Cairo", size: 42).weight(.black))
-                            .minimumScaleFactor(0.3)
-                            .lineLimit(1)
-                            .padding(.horizontal, 10)
-                            .foregroundColor(.white)
-                        Text(isConverting ? "converting..." : label)
-                            .font(.custom("Cairo", size: 14).weight(.bold))
-                            .foregroundColor(.white.opacity(0.8))
-                    }
-                }
-                .frame(width: 140, height: 140)
-            }
-        }
-        .frame(width: 220, height: 220)
-    }
-}
-
-struct DashedCircleStatic: View {
-    let count: Int
-    var limit: Int = 32
-    
-    var body: some View {
-        GeometryReader { geo in
-            let center = CGPoint(x: geo.size.width/2, y: geo.size.height/2)
-            let radius = min(geo.size.width, geo.size.height)/2
-            
-            ForEach(0..<32, id: \.self) { i in
-                Circle()
-                    .frame(width: 4, height: 4)
-                    .position(x: center.x + radius * cos(CGFloat(i) * (2 * .pi / 32) - .pi/2),
-                              y: center.y + radius * sin(CGFloat(i) * (2 * .pi / 32) - .pi/2))
-                    .opacity(i < limit ? 1.0 : 0.3)
-            }
-        }
     }
 }
 
 struct GPHYXSegmentedPicker: View {
     let options: [String]
     @Binding var selection: Int
-    
     var body: some View {
-        HStack(spacing: 0) {
+        HStack(spacing: 2) {
             ForEach(0..<options.count, id: \.self) { i in
                 Button(action: { selection = i }) {
                     Text(options[i])
-                        .font(.custom("Cairo", size: 12).weight(.bold))
+                        .font(.custom("Cairo", size: 11).weight(.bold))
                         .foregroundColor(.white)
-                        .padding(.vertical, 6)
-                        .padding(.horizontal, 12)
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 10)
                         .frame(maxWidth: .infinity)
                         .background(
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(selection == i ? GPHYXColors.accentBlue : Color.clear)
+                            RoundedRectangle(cornerRadius: 7)
+                                .fill(selection == i ? GPHYXColors.accent : Color.white.opacity(0.08))
                         )
                 }
                 .buttonStyle(.plain)
             }
         }
-        .padding(4)
-        .background(Color.black.opacity(0.2))
+        .padding(3)
+        .background(Color.black.opacity(0.25))
         .cornerRadius(10)
     }
 }
 
-struct StatLabel: View {
-    let title: String
-    let value: String
+struct SectionLabel: View {
+    let text: String
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(title).font(.custom("Cairo", size: 10).weight(.black)).foregroundColor(.white)
-            Text(value).font(.custom("Cairo", size: 18).weight(.black)).foregroundColor(GPHYXColors.textMain)
+        Text(text)
+            .font(.custom("Cairo", size: 10).weight(.black))
+            .foregroundColor(.white.opacity(0.5))
+            .tracking(1)
+    }
+}
+
+struct FileRowCard: View {
+    let label: String
+    let value: String
+    let placeholder: String
+    let onPick: () -> Void
+    var onReveal: (() -> Void)? = nil
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            SectionLabel(text: label)
+            HStack(spacing: 8) {
+                Text(value.isEmpty ? placeholder : (URL(fileURLWithPath: value).lastPathComponent))
+                    .font(.custom("Cairo", size: 13))
+                    .foregroundColor(value.isEmpty ? .white.opacity(0.35) : .white)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                GPHYXIconButton(icon: "folder", action: onPick)
+                if let reveal = onReveal {
+                    GPHYXIconButton(icon: "arrow.up.right", action: reveal)
+                }
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 10)
+            .background(GPHYXColors.card)
+            .cornerRadius(14)
         }
     }
 }
 
-// MARK: - Main Application
+// MARK: - Status Card (compact)
+struct CompactStatusCard: View {
+    let splatCount: Int
+    let vram: Double
+    let size: Double
+    let fileSHDegree: Int
+    let progress: Double
+    let isConverting: Bool
 
+    var body: some View {
+        VStack(spacing: 12) {
+            // Progress Ring + Count
+            ZStack {
+                Circle()
+                    .stroke(Color.white.opacity(0.08), lineWidth: 6)
+                    .frame(width: 110, height: 110)
+                Circle()
+                    .trim(from: 0, to: CGFloat(progress))
+                    .stroke(GPHYXColors.accent, style: StrokeStyle(lineWidth: 6, lineCap: .round))
+                    .rotationEffect(.degrees(-90))
+                    .frame(width: 110, height: 110)
+                    .animation(.easeOut(duration: 0.3), value: progress)
+
+                VStack(spacing: 2) {
+                    Text(isConverting ? "\(Int(progress * 100))%" : formatCount(splatCount))
+                        .font(.custom("Cairo", size: 24).weight(.black))
+                        .foregroundColor(.white)
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(1)
+                    Text(isConverting ? "converting" : "splats")
+                        .font(.custom("Cairo", size: 11).weight(.bold))
+                        .foregroundColor(.white.opacity(0.6))
+                }
+            }
+
+            // Stats row
+            HStack(spacing: 0) {
+                statItem(label: "VRAM", value: String(format: "%.0f MB", vram))
+                Divider().background(.white.opacity(0.15)).frame(height: 30)
+                statItem(label: "SIZE", value: String(format: "%.1f MB", size))
+                Divider().background(.white.opacity(0.15)).frame(height: 30)
+                statItem(label: "SH DEGREE", value: "\(fileSHDegree)")
+            }
+            .padding(.horizontal, 8)
+            .padding(.vertical, 8)
+            .background(GPHYXColors.card)
+            .cornerRadius(12)
+        }
+    }
+
+    private func statItem(label: String, value: String) -> some View {
+        VStack(spacing: 2) {
+            Text(label).font(.custom("Cairo", size: 9).weight(.black)).foregroundColor(.white.opacity(0.45))
+            Text(value).font(.custom("Cairo", size: 16).weight(.black)).foregroundColor(.white)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private func formatCount(_ n: Int) -> String {
+        if n >= 1_000_000 { return String(format: "%.1fM", Double(n) / 1_000_000) }
+        if n >= 1_000 { return String(format: "%.0fK", Double(n) / 1_000) }
+        return "\(n)"
+    }
+}
+
+// MARK: - Main View
 struct ContentView: View {
     @StateObject private var viewModel = ConversionViewModel()
-    @State private var isTargeted = false
-    
+
     init() {
         if let fontURL = Bundle.main.url(forResource: "Cairo-VariableFont_slnt,wght", withExtension: "ttf") {
             CTFontManagerRegisterFontsForURL(fontURL as CFURL, .process, nil)
         }
     }
-    
+
     var body: some View {
         ZStack {
-            GPHYXColors.bg.edgesIgnoringSafeArea(.all)
-            
-            VStack(spacing: 0) {
-                // Top Bar
-                HStack {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("GPHYX").font(.system(size: 14, weight: .black)).foregroundColor(GPHYXColors.accent)
-                        Text("PLY Utility").font(.custom("Cairo", size: 24).weight(.black)).foregroundColor(.white)
+            GPHYXColors.bg.ignoresSafeArea()
+            HStack(alignment: .top, spacing: 0) {
+
+                // ── Left panel ──────────────────────
+                VStack(alignment: .leading, spacing: 20) {
+
+                    // Header
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("GPHYX")
+                            .font(.system(size: 11, weight: .black))
+                            .foregroundColor(GPHYXColors.accent)
+                        Text("PLY2SPLAT")
+                            .font(.custom("Cairo", size: 22).weight(.black))
+                            .foregroundColor(.white)
                     }
+
+                    Divider().background(Color.white.opacity(0.05))
+
+                    // Source
+                    FileRowCard(
+                        label: "SOURCE FILE",
+                        value: viewModel.inputPath,
+                        placeholder: "Choose a PLY file...",
+                        onPick: viewModel.selectInputFile
+                    )
+
+                    // Destination
+                    FileRowCard(
+                        label: "DESTINATION",
+                        value: viewModel.outputDirectory,
+                        placeholder: "Output folder…",
+                        onPick: viewModel.selectOutputDirectory,
+                        onReveal: viewModel.openOutputDirectory
+                    )
+
+                    // SH Degree
+                    VStack(alignment: .leading, spacing: 6) {
+                        SectionLabel(text: "SH DEGREE")
+                        GPHYXSegmentedPicker(
+                            options: ["Auto", "0", "1", "2", "3"],
+                            selection: $viewModel.shDegreeIndex
+                        )
+                    }
+
+                    // Reduce Splats
+                    VStack(alignment: .leading, spacing: 6) {
+                        SectionLabel(text: "REDUCE SPLATS")
+                        GPHYXSegmentedPicker(
+                            options: ["40%", "60%", "80%", "100%"],
+                            selection: $viewModel.splatPercentIndex
+                        )
+                    }
+
                     Spacer()
-                    Button("Buy me a coffee") {}.buttonStyle(GPHYXButtonStyle())
-                }
-                .padding(32)
-                
-                ScrollView {
-                    VStack(spacing: 24) {
-                        
-                        // Main Sections Row
-                        HStack(alignment: .top, spacing: 24) {
-                            // Left Column: Inputs
-                            VStack(alignment: .leading, spacing: 20) {
-                                Text("FILES")
-                                    .font(.custom("Cairo", size: 14).weight(.black))
-                                    .foregroundColor(.white)
-                                
-                                // Source File Card
-                                HomeCard(title: "SOURCE PLY") {
-                                    HStack {
-                                        Text(viewModel.inputPath.isEmpty ? "Drag & drop file..." : URL(fileURLWithPath: viewModel.inputPath).lastPathComponent)
-                                            .font(.custom("Cairo", size: 14))
-                                            .foregroundColor(.white)
-                                        Spacer()
-                                        GPHYXRoundButton(icon: "folder", action: viewModel.selectInputFile)
-                                    }
-                                }
-                                
-                                // Destination Card
-                                HomeCard(title: "DESTINATION") {
-                                    HStack(spacing: 12) {
-                                        Text(viewModel.outputDirectory.isEmpty ? "No folder set" : viewModel.outputDirectory)
-                                            .font(.custom("Cairo", size: 12))
-                                            .lineLimit(1)
-                                            .foregroundColor(.white)
-                                        Spacer()
-                                        GPHYXRoundButton(icon: "plus", action: viewModel.selectOutputDirectory)
-                                        GPHYXRoundButton(icon: "arrow.up.right", action: viewModel.openOutputDirectory)
-                                    }
-                                }
-                                
-                                // Preset Block
-                                Button(action: viewModel.applyWebReadyPreset) {
-                                    HStack {
-                                        VStack(alignment: .leading) {
-                                            Text("Web Ready Preset").font(.custom("Cairo", size: 14).weight(.black))
-                                            Text("Optimized for web players").font(.caption).foregroundColor(.white)
-                                        }
-                                        Spacer()
-                                        GPHYXEqualizerView()
-                                    }
-                                    .padding()
-                                    .background(GPHYXColors.accent)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(20)
-                                }
-                                .buttonStyle(.plain)
-                            }
-                            
-                            // Right Column: Status Card
-                            VStack(spacing: 20) {
-                                Text("SYSTEM STATUS")
-                                    .font(.custom("Cairo", size: 14).weight(.black))
-                                    .foregroundColor(.white)
-                                
-                                GPHYXStatusCardRefined(
-                                    value: viewModel.splatCount > 0 ? viewModel.splatCount.formatted() : "0", 
-                                    label: "total splats",
-                                    progress: viewModel.progress,
-                                    isConverting: viewModel.isConverting
-                                )
-                                
-                                HStack {
-                                    StatLabel(title: "VRAM", value: String(format: "%.0f MB", viewModel.estimatedVRAM))
-                                    Spacer()
-                                    StatLabel(title: "SIZE", value: String(format: "%.1f MB", viewModel.fileSizeMB))
-                                }
-                                .padding()
-                                .background(GPHYXColors.card)
-                                .cornerRadius(20)
-                            }
-                        }
-                        
-                        // Settings Section
-                        VStack(alignment: .leading, spacing: 20) {
-                            Text("CONVERSION SETTINGS")
-                                .font(.custom("Cairo", size: 14).weight(.black))
+
+                    // Action buttons
+                    VStack(spacing: 10) {
+                        Button(action: viewModel.startConversion) {
+                            Text(viewModel.isConverting ? "CONVERTING…" : "START CONVERSION")
+                                .font(.custom("Cairo", size: 15).weight(.black))
+                                .tracking(1)
                                 .foregroundColor(.white)
-                            
-                            HStack(spacing: 32) {
-                                Toggle(".splat", isOn: $viewModel.exportSplat)
-                                Toggle(".ksplat", isOn: $viewModel.exportKSplat)
-                                Toggle(".spz", isOn: $viewModel.exportSPZ)
-                            }
-                            .toggleStyle(GPHYXToggleStyle())
-                            
-                            HStack(spacing: 24) {
-                                VStack(alignment: .leading) {
-                                    Text("COMPRESSION").font(.custom("Cairo", size: 12).weight(.bold)).foregroundColor(.white)
-                                    GPHYXSegmentedPicker(options: ["None", "Float16", "Uint8"], selection: $viewModel.compressionLevel)
-                                        .frame(width: 300)
-                                }
-                                
-                                VStack(alignment: .leading) {
-                                    Text("MAX SPLATS").font(.custom("Cairo", size: 12).weight(.bold)).foregroundColor(.white)
-                                    GPHYXSegmentedPicker(options: ["100K", "250K", "500K", "1M"], selection: $viewModel.maxSplatsIndex)
-                                        .frame(width: 300)
-                                }
-                                
-                                Spacer()
-                                
-                                GPHYXRoundButton(icon: "power", action: { viewModel.useMetal.toggle() }, isOn: viewModel.useMetal)
-                                Text("METAL").font(.custom("Cairo", size: 12).weight(.black)).foregroundColor(.white)
-                            }
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 14)
+                                        .fill(viewModel.isConverting
+                                              ? GPHYXColors.accent.opacity(0.5)
+                                              : GPHYXColors.accent)
+                                )
                         }
-                        .padding(32)
-                        .background(GPHYXColors.card)
-                        .cornerRadius(32)
-                        
-                        // Action Footer
-                        VStack(spacing: 16) {
-                            Button(action: viewModel.startConversion) {
-                                Text(viewModel.isConverting ? "CONVERTING..." : "START CONVERSION")
-                                    .tracking(2)
-                            }
-                            .buttonStyle(GPHYXButtonStyle(isProminent: true))
-                            .disabled(viewModel.isConverting || viewModel.inputPath.isEmpty)
-                        }
-                        .padding(.top, 20)
+                        .buttonStyle(.plain)
+                        .disabled(viewModel.isConverting || viewModel.inputPath.isEmpty)
                     }
-                    .padding(32)
                 }
+                .padding(28)
+                .frame(maxWidth: .infinity)
+
+                // ── Right panel ─────────────────────
+                VStack(alignment: .center, spacing: 20) {
+                    HStack(spacing: 12) {
+                        SectionLabel(text: "SYSTEM STATUS")
+                        Spacer()
+                        Button(action: viewModel.copyLogsToClipboard) {
+                            Text("COPY")
+                                .font(.custom("Cairo", size: 10).weight(.black))
+                                .foregroundColor(.white.opacity(0.4))
+                        }
+                        .buttonStyle(.plain)
+                        
+                        Button(action: viewModel.clearLogs) {
+                            Text("CLEAR")
+                                .font(.custom("Cairo", size: 10).weight(.black))
+                                .foregroundColor(.white.opacity(0.4))
+                        }
+                        .buttonStyle(.plain)
+                    }
+
+                    CompactStatusCard(
+                        splatCount: viewModel.splatCount,
+                        vram: viewModel.estimatedVRAM,
+                        size: viewModel.fileSizeMB,
+                        fileSHDegree: viewModel.fileSHDegree,
+                        progress: viewModel.progress,
+                        isConverting: viewModel.isConverting
+                    )
+
+                    // Log
+                    ScrollViewReader { proxy in
+                        ScrollView {
+                            Text(viewModel.logMessages.map { $0.text }.joined(separator: "\n"))
+                                .font(.custom("Cairo", size: 10))
+                                .foregroundColor(.white.opacity(0.65))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .textSelection(.enabled)
+                                .padding(10)
+                                .id("logBottom")
+                        }
+                        .onChange(of: viewModel.logMessages.count) { _ in
+                            withAnimation {
+                                proxy.scrollTo("logBottom", anchor: .bottom)
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(GPHYXColors.card)
+                    .cornerRadius(14)
+                }
+                .padding(28)
+                .frame(width: 300)
+                .background(Color.black.opacity(0.18))
             }
         }
-        .frame(minWidth: 850, minHeight: 800)
-    }
-}
-
-struct HomeCard<Content: View>: View {
-    let title: String
-    let content: Content
-    
-    init(title: String, @ViewBuilder content: () -> Content) {
-        self.title = title
-        self.content = content()
-    }
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(title).font(.custom("Cairo", size: 10).weight(.black)).foregroundColor(.white)
-            content
-                .padding()
-                .background(GPHYXColors.card)
-                .cornerRadius(20)
-        }
-    }
-}
-
-struct GPHYXToggleStyle: ToggleStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        Button {
-            configuration.isOn.toggle()
-        } label: {
-            HStack {
-                Circle()
-                    .fill(configuration.isOn ? GPHYXColors.accentBlue : Color.white.opacity(0.1))
-                    .frame(width: 12, height: 12)
-                configuration.label
-                    .font(.custom("Cairo", size: 14).weight(.bold))
-                    .foregroundColor(.white)
-            }
-        }
-        .buttonStyle(.plain)
+        .frame(minWidth: 750, minHeight: 500)
     }
 }
