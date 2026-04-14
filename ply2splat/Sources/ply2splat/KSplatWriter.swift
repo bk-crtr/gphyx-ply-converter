@@ -17,20 +17,19 @@ final class KSplatWriter {
         // ── File Header (4096 bytes, page-aligned) ──
         let splatCount = UInt32(cloud.count)
 
-        // Offset 0-1: Version = 1 as big-endian UInt16 → 0x00 0x01
+        // Offset 0-3: Magic/Version = 0x00 0x01 0x00 0x00
         buffer.append(0x00)
         buffer.append(0x01)
-        // Offset 2-3: reserved
         buffer.append(0x00)
         buffer.append(0x00)
 
-        // Offset 4-7: totalSplatCount (little-endian UInt32)
-        appendU32(&buffer, splatCount)
-
-        // Offset 8-11: sectionCount = 1 (little-endian UInt32)
+        // Offset 4-7: chunkCount = 1 (Little Endian UInt32)
         appendU32(&buffer, 1)
 
-        // Offset 12-15: maxSplatCount (same as splatCount)
+        // Offset 8-11: splatCount in chunk (Little Endian UInt32)
+        appendU32(&buffer, splatCount)
+
+        // Offset 12-15: total splat count OR reserved (Using splatCount per large reference)
         appendU32(&buffer, splatCount)
 
         // Offset 16..31: Reserved zeros
