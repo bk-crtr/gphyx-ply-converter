@@ -301,7 +301,7 @@ struct ContentView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(height: 60)
-                                .opacity(0.6)
+                                .opacity(0.4)
                                 .shadow(color: GPHYXColors.accent.opacity(0.8), radius: 4)
                                 .shadow(color: GPHYXColors.accent.opacity(0.4), radius: 12)
                         }
