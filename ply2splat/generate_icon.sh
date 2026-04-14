@@ -10,11 +10,10 @@ fi
 ICONSET_DIR="AppIcon.iconset"
 mkdir -p "$ICONSET_DIR"
 
-# Create a square version with padding to prevent stretching
-# 1024 is the max size. We'll use 824 for the content to leave a margin (standard macOS icon practice)
-sips -s format png --resampleHeightWidthMax 824 "$SOURCE_IMG" --out temp_fit.png
-# Pad to 1024x1024 with transparency
-sips -s format png -p 1024 1024 --padColor 000000 temp_fit.png --out square_source.png
+# Center crop to 1:1 and resize to 1024x1024
+# The source is 1376x768, so we crop a 768x768 center.
+sips -s format png -c 768 768 "$SOURCE_IMG" --out temp_crop.png
+sips -s format png -z 1024 1024 temp_crop.png --out square_source.png
 
 # Generate various sizes from the square source
 sips -s format png -z 16 16     square_source.png --out "$ICONSET_DIR/icon_16x16.png"
