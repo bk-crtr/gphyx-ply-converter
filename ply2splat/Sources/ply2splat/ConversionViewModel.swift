@@ -200,7 +200,17 @@ class ConversionViewModel: ObservableObject {
             DispatchQueue.main.async { self.progress = 0.6 }
             
             // Export .splat only
-            let baseFilePath = outputDirURL.appendingPathComponent(basename).path
+            var filenameSuffix = ""
+            if self.shDegreeIndex > 0 {
+                let targetSH = [0, 1, 2, 3][self.shDegreeIndex - 1]
+                filenameSuffix += "_SH\(targetSH)"
+            }
+            if splatPercent < 100 {
+                filenameSuffix += "_\(splatPercent)pct"
+            }
+            
+            let finalBasename = basename + filenameSuffix
+            let baseFilePath = outputDirURL.appendingPathComponent(finalBasename).path
             let path = uniqueOutputPath(base: baseFilePath, ext: "splat")
             log("Writing .splat → \(path)")
             let writer = SplatWriter()
