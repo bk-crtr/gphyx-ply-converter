@@ -68,7 +68,7 @@ EOF
 
 echo "Signing the Application..."
 xattr -cr "$APP_DIR"
-codesign --force --deep --sign "Developer ID Application: GADZHI MUSALCHIEV (NM74G59H9M)" "$APP_DIR"
+codesign --force --deep --options runtime --timestamp --sign "Developer ID Application: GADZHI MUSALCHIEV (NM74G59H9M)" "$APP_DIR"
 
 echo "✅ Done! Application created at $APP_DIR and signed!"
 echo "You can launch it by running: open $APP_DIR"
